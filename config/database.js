@@ -4,7 +4,7 @@ const mysql = require('mysql2')
 
 //Aquí definimos el objeto que se va a exportar tipo singletone para la conexión a la base de datos
 //Los datos de conexión vienen del .env, así no quedan escritos en el código
-const conexion = mysql.createConnection({
+const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -12,7 +12,7 @@ const conexion = mysql.createConnection({
 });
 
 //Se conecta una sola vez al iniciar el servidor y avisa en consola si funcionó
-conexion.connect((error)=>{
+connection.connect((error)=>{
     if(error){
         console.log('Error al acceder a la base de datos',error)
         return;
@@ -20,4 +20,4 @@ conexion.connect((error)=>{
     console.log('Conectado correctamente con MySQL')
 })
 //Se exporta la misma conexión para que la usen los services
-module.exports=conexion
+module.exports=connection

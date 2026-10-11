@@ -25,8 +25,8 @@ async function login(user,callback){
             return
         }
         //comparamos la contraseña escrita contra el hash guardado previamente
-        const passwordValido = await bcrypt.compare(user.password,result.password);
-        if(!passwordValido){
+        const passwordValid = await bcrypt.compare(user.password,result.password);
+        if(!passwordValid){
             //Mismo mensaje que si el correo no existe, para no dar pistas
             callback("Credenciales invalidas",null)
             return
