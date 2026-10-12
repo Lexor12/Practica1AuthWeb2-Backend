@@ -22,22 +22,30 @@ route.post('/auth/register',async(req,res)=>{
     //const {name,email,password,rol} = req.body
     //const user = new User(null,name,email,password,rol)
 
-    //Usuarios fijos para la práctica; el último valor es el id del rol (1 = admin, 2 = cajero)
+    //Usuarios fijos para la práctica; el último valor es el id del rol (1 = admin, 2 = cajero, 3 = almacen)
     const user = new User(null,"Juan Perez","juape@gmail.com","juanperez123",1)
-    const user2 = new User(null,"Roberto Lopez","robelo@gmail.com","robertolopez123",2)
-    authController.register(user2,(error)=>{
+    const user2 = new User(null,"Luis Rendon","luisren@gmail.com","luisrendon123",2)
+    const user3 = new User(null,"Roberto Lopez","robelo@gmail.com","robertolopez123",3)
+    authController.register(user,(error)=>{
         if(error){
             return res.status(400).json({
                 message:error
             })
         }
-        authController.register(user,(error,result)=>{
+        authController.register(user2,(error,result)=>{
             if(error){
                 return res.status(400).json({
                     message:error
                 })
             }
-            return res.status(201).json({message:result})
+            authController.register(user3,(error,result)=>{
+                if(error){
+                    return res.status(400).json({
+                        message:error
+                    })
+                }
+                return res.status(201).json({message:result})
+            })
         })
     })
 })
